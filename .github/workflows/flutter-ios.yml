@@ -1,0 +1,77 @@
+name: Flutter iOS build and simulator test
+
+on:
+  pull_request:
+    paths: ['app/**', '.github/workflows/flutter-ios.yml']
+  push:
+    branches: [main]
+    paths: ['app/**', '.github/workflows/flutter-ios.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  flutter-ios:
+    runs-on: macos-26
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+
+      - name: Analyze and unit test
+        run: |
+          mkdir -p screenshots
+          flutter pub get
+          flutter analyze 2>&1 | tee screenshots/analyze.log
+          flutter test 2>&1 | tee screenshots/test.log
+
+      - name: Prepare iPhone simulator
+        id: sim
+        timeout-minutes: 10
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          devices = [d for runtime, group in json.load(sys.stdin)["devices"].items()
+                     if "iOS-26" in runtime for d in group
+                     if d["name"].startswith("iPhone") and d.get("isAvailable", False)]
+          devices.sort(key=lambda d: (d["name"] != "iPhone 17 Pro", d["name"], d["udid"]))
+          if not devices:
+              sys.exit("No available iPhone simulator with iOS 26 was found.")
+          print(devices[0]["udid"])')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          xcrun simctl bootstatus "$UDID" -b
+
+      - name: Build Flutter app for iOS simulator
+        run: flutter build ios --simulator --debug --no-codesign 2>&1 | tee screenshots/build.log
+
+      - name: Run full ride flow on iPhone
+        timeout-minutes: 15
+        run: |
+          flutter drive \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/app_test.dart \
+            -d "${{ steps.sim.outputs.udid }}" 2>&1 | tee screenshots/drive.log
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zipride-flutter-ios
+          path: app/screenshots
+          if-no-files-found: warn
+          retention-days: 7
