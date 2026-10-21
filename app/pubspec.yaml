@@ -1,5 +1,5 @@
 name: zipride
-description: "A new Flutter project."
+description: "Zipride: corridas em Itapipoca (cliente, motorista e painel admin)."
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -9,6 +9,8 @@ environment:
 dependencies:
   cupertino_icons: ^2.0.0
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   flutter_map: ^8.3.2
   latlong2: ^0.10.1

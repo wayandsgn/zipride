@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final store = _store!;
     if (store.ratingPending && !_ratingOpen) {
       _ratingOpen = true;
-      Navigator.of(context, rootNavigator: true)
+      Navigator.of(context)
           .push(MaterialPageRoute<void>(fullscreenDialog: true, builder: (_) => const RatingScreen()))
           .whenComplete(() => _ratingOpen = false);
     }

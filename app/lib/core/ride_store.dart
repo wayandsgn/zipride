@@ -26,13 +26,21 @@ class CameraTarget {
 
 /// Single source of truth for the demo. Nothing is persisted: each launch starts from Fixtures.
 class RideStore extends ChangeNotifier {
-  RideStore({this.timeScale = 1, this.showMapTiles = true});
+  RideStore({this.timeScale = 1}) {
+    Pricing.instance.addListener(notifyListeners);
+  }
 
   /// 1 in the app; tests can speed the ride up.
   final double timeScale;
 
-  /// Tests turn map tiles off so they never touch the network.
-  final bool showMapTiles;
+  // Hooks used by the web demo when the driver app runs next to this one.
+  /// Offers the ride to the linked driver; completes with true when accepted.
+  Future<bool> Function(RideStore store)? dispatch;
+  VoidCallback? onCancelled;
+  VoidCallback? onTripStarted;
+
+  /// True while a real (linked) driver is handling this ride.
+  bool linkedDriver = false;
 
   // Navigation
   AppTab tab = AppTab.home;
@@ -171,7 +179,13 @@ class RideStore extends ChangeNotifier {
     _moveCamera(const CameraTarget.center(LatLng(-3.4962, -39.5786), 16.2));
     HapticFeedback.mediumImpact();
     notifyListeners();
-    await _sleep(const Duration(seconds: 3));
+    final send = dispatch;
+    if (send != null && await send(this)) {
+      if (run != _run) return;
+      linkedDriver = true;
+    } else {
+      await _sleep(const Duration(seconds: 3));
+    }
     if (run != _run) return;
     _driverMatched(run);
   }
@@ -195,13 +209,14 @@ class RideStore extends ChangeNotifier {
 
   Future<void> _scheduleAutoStart(int run) async {
     await _sleep(const Duration(milliseconds: 2500));
-    if (run != _run || phase != RidePhase.driverArrived || showChat) return;
+    if (run != _run || phase != RidePhase.driverArrived || showChat || linkedDriver) return;
     startTrip();
   }
 
-  Future<void> startTrip() async {
+  Future<void> startTrip({bool fromLink = false}) async {
     if (phase != RidePhase.driverArrived && phase != RidePhase.driverEnRoute) return;
     final run = ++_run;
+    if (linkedDriver && !fromLink) onTripStarted?.call();
     driverProgress = 1;
     tripProgress = 0;
     phase = RidePhase.onTrip;
@@ -217,6 +232,7 @@ class RideStore extends ChangeNotifier {
   }
 
   void cancelRide() {
+    if (phase != RidePhase.idle && phase != RidePhase.choosing) onCancelled?.call();
     _run++;
     _reset();
     HapticFeedback.lightImpact();
@@ -251,6 +267,7 @@ class RideStore extends ChangeNotifier {
   }
 
   void _reset() {
+    linkedDriver = false;
     phase = RidePhase.idle;
     destination = null;
     route = const [];

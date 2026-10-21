@@ -41,7 +41,7 @@ class _TripRow extends StatelessWidget {
       key: ValueKey('trip_${trip.id}'),
       scale: 0.98,
       semanticLabel: trip.destination.name,
-      onTap: () => Navigator.of(context, rootNavigator: true).push(
+      onTap: () => Navigator.of(context).push(
         MaterialPageRoute<void>(builder: (_) => ReceiptScreen(trip: trip)),
       ),
       child: ClipRRect(

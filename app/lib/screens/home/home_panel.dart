@@ -15,7 +15,7 @@ void openSearch(BuildContext context, {String? rideId}) {
   final store = StoreScope.read(context);
   if (rideId != null) store.selectRide(rideId);
   store.select(AppTab.home);
-  Navigator.of(context, rootNavigator: true).push(
+  Navigator.of(context).push(
     MaterialPageRoute<void>(fullscreenDialog: true, builder: (_) => const SearchScreen()),
   );
 }

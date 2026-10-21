@@ -15,7 +15,7 @@ class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
   void _push(BuildContext context, Widget page) {
-    Navigator.of(context, rootNavigator: true).push(MaterialPageRoute<void>(builder: (_) => page));
+    Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
   }
 
   @override

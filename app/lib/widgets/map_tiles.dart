@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-import '../core/ride_store.dart';
-
 /// OpenStreetMap basemap, desaturated and lifted so it reads like a muted Apple map.
-/// Shared by every map. Hidden when the store turns tiles off (tests).
+/// Shared by every map in the customer, driver and admin apps.
 class MapTiles extends StatelessWidget {
   const MapTiles({super.key});
 
+  /// Tests turn tiles off so they never touch the network.
+  static bool enabled = true;
+
   @override
   Widget build(BuildContext context) {
-    if (!StoreScope.read(context).showMapTiles) return const SizedBox.shrink();
+    if (!enabled) return const SizedBox.shrink();
     return TileLayer(
       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       userAgentPackageName: 'app.zipride.zipride',

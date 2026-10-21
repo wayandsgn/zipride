@@ -46,9 +46,38 @@ class RideType {
   final Color color;
 
   /// In-town trips (up to 3 km) cost the base price; longer trips add a per-km rate.
+  /// The admin panel can change both and add surge pricing (see [Pricing]).
   double priceFor(double km) {
-    final extra = (km - 3).clamp(0, double.infinity) * perKm;
-    return ((basePrice + extra) * 10).round() / 10;
+    final p = Pricing.instance;
+    final extra = (km - 3).clamp(0, double.infinity) * p.perKm(this);
+    return ((p.base(this) + extra) * p.surge * 10).round() / 10;
+  }
+}
+
+/// Live price table edited in the admin panel. Starts from the values in Fixtures.
+class Pricing extends ChangeNotifier {
+  static final instance = Pricing();
+
+  final Map<String, (double, double)> _overrides = {};
+  double surge = 1;
+
+  double base(RideType r) => _overrides[r.id]?.$1 ?? r.basePrice;
+  double perKm(RideType r) => _overrides[r.id]?.$2 ?? r.perKm;
+
+  void set(RideType r, {required double base, required double perKm}) {
+    _overrides[r.id] = (base, perKm);
+    notifyListeners();
+  }
+
+  void setSurge(double value) {
+    surge = value;
+    notifyListeners();
+  }
+
+  void reset() {
+    _overrides.clear();
+    surge = 1;
+    notifyListeners();
   }
 }
 

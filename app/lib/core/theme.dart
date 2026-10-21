@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Zipride palette: "verde-jangada" accent on a clean light UI with black primary actions.
 class ZTheme {
@@ -20,6 +21,15 @@ class ZTheme {
   static const cardRadius = 18.0;
 
   static const font = 'Inter';
+
+  /// Every app speaks Brazilian Portuguese, including system strings (back, copy, paste).
+  static const locale = Locale('pt', 'BR');
+  static const locales = [locale];
+  static const delegates = [
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   static ThemeData data() {
     final base = ThemeData(

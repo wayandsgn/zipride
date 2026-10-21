@@ -218,6 +218,7 @@ class CircleIconButton extends StatelessWidget {
 /// iOS-style alert built in Flutter so it looks the same on Android.
 Future<void> showNotice(BuildContext context, String title, String message) {
   return showDialog<void>(
+    useRootNavigator: false,
     context: context,
     barrierColor: const Color(0x40000000),
     builder: (context) => _AppleAlert(title: title, message: message, actions: [
@@ -229,6 +230,7 @@ Future<void> showNotice(BuildContext context, String title, String message) {
 /// iOS-style two-button confirmation. Returns true when the destructive action is chosen.
 Future<bool> showConfirm(BuildContext context, {required String title, required String message, required String cancel, required String confirm}) async {
   final result = await showDialog<bool>(
+    useRootNavigator: false,
     context: context,
     barrierColor: const Color(0x40000000),
     builder: (context) => _AppleAlert(title: title, message: message, actions: [
@@ -319,4 +321,23 @@ Future<T?> showZSheet<T>(BuildContext context, WidgetBuilder builder, {bool expa
         ? FractionallySizedBox(heightFactor: 0.92, child: builder(context))
         : Padding(padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom), child: builder(context)),
   );
+}
+
+/// Tinted circle with a person's initials, for people without a photo.
+class InitialsAvatar extends StatelessWidget {
+  const InitialsAvatar(this.name, {super.key, this.size = 40});
+  final String name;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final initials = name.split(' ').where((w) => w.isNotEmpty).map((w) => w[0]).take(2).join();
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(color: ZTheme.accentSoft, shape: BoxShape.circle),
+      child: Text(initials, style: TextStyle(fontSize: size * 0.36, fontWeight: FontWeight.w700, color: ZTheme.accent)),
+    );
+  }
 }

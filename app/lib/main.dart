@@ -24,7 +24,9 @@ class ZiprideApp extends StatelessWidget {
         title: 'Zipride',
         debugShowCheckedModeBanner: false,
         theme: ZTheme.data(),
-        locale: const Locale('pt', 'BR'),
+        locale: ZTheme.locale,
+        supportedLocales: ZTheme.locales,
+        localizationsDelegates: ZTheme.delegates,
         home: const AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
