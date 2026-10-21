@@ -1,6 +1,8 @@
 name: iOS build and UI test
 
 on:
+  pull_request:
+    paths: ['Zipride/**', 'ZiprideUITests/**', 'project.yml', '.github/workflows/ios.yml']
   push:
     branches: [main]
     paths: ['Zipride/**', 'ZiprideUITests/**', 'project.yml', '.github/workflows/ios.yml']
@@ -36,6 +38,7 @@ jobs:
 
       - name: Pick simulator
         id: sim
+        timeout-minutes: 10
         run: |
           xcrun simctl list devices available
           UDID=$(xcrun simctl list devices available -j | python3 -c '
@@ -48,8 +51,15 @@ jobs:
                   if d["name"].startswith("iPhone 17 Pro") and "Max" not in d["name"]: best=d["udid"]
                   elif best is None and d["name"].startswith("iPhone"): best=d["udid"]
           print(best or "")')
+          if [ -z "$UDID" ]; then
+            echo "::error::No available iPhone simulator with iOS 26 was found."
+            exit 1
+          fi
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
           echo "Using $UDID"
+          # Boot before XCTest starts its application-launch deadline. This also
+          # waits for first-boot setup instead of relying on a fixed sleep.
+          xcrun simctl bootstatus "$UDID" -b
 
       - name: Build and run UI tests
         run: |
@@ -59,6 +69,7 @@ jobs:
             -project Zipride.xcodeproj \
             -scheme Zipride \
             -destination "id=${{ steps.sim.outputs.udid }}" \
+            -parallel-testing-enabled NO \
             -resultBundlePath build/Results.xcresult \
             > build/xcodebuild.log 2>&1 || status=$?
           grep -E "error:|Test Case|\*\* |XCTAssert|failed" build/xcodebuild.log | head -200 || true
@@ -83,7 +94,7 @@ jobs:
             build/xcodebuild.log
 
       - name: Publish results to ci-results branch
-        if: always()
+        if: always() && github.ref == 'refs/heads/main'
         env:
           TOKEN: ${{ github.token }}
         run: |
