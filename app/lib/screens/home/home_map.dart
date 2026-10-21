@@ -111,7 +111,7 @@ class _HomeMapState extends State<HomeMap> with TickerProviderStateMixin {
           alignment: Alignment(1, -0.62),
           child: Padding(
             padding: EdgeInsets.only(right: 6),
-            child: Text('© OpenStreetMap · CARTO', style: TextStyle(fontSize: 9, color: Color(0x99000000))),
+            child: Text('© OpenStreetMap', style: TextStyle(fontSize: 9, color: Color(0x99000000))),
           ),
         ),
       ],
