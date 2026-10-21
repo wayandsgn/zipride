@@ -1,0 +1,60 @@
+name: Zipride
+options:
+  bundleIdPrefix: app.zipride
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "26.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    DEVELOPMENT_TEAM: ""
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+targets:
+  Zipride:
+    type: application
+    platform: iOS
+    sources:
+      - path: Zipride
+    info:
+      path: Zipride/Info.plist
+      properties:
+        CFBundleDisplayName: Zipride
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        CFBundleDevelopmentRegion: pt-BR
+        UILaunchScreen:
+          UIColorName: AccentColor
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.zipride.Zipride
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+  ZiprideUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: ZiprideUITests
+    dependencies:
+      - target: Zipride
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.zipride.ZiprideUITests
+        TEST_TARGET_NAME: Zipride
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  Zipride:
+    build:
+      targets:
+        Zipride: all
+        ZiprideUITests: [test]
+    test:
+      targets:
+        - ZiprideUITests

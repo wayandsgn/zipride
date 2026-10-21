@@ -1,0 +1,77 @@
+name: iOS build and UI test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-test:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check image URLs
+        continue-on-error: true
+        run: ./scripts/check-urls.sh
+
+      - name: Select Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+
+      - name: Generate project
+        run: |
+          brew install xcodegen
+          xcodegen generate
+
+      - name: Pick simulator
+        id: sim
+        run: |
+          xcrun simctl list devices available
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json,sys
+          data=json.load(sys.stdin)["devices"]
+          best=None
+          for runtime,devs in data.items():
+              if "iOS-26" not in runtime: continue
+              for d in devs:
+                  if d["name"].startswith("iPhone 17 Pro") and "Max" not in d["name"]: best=d["udid"]
+                  elif best is None and d["name"].startswith("iPhone"): best=d["udid"]
+          print(best or "")')
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          echo "Using $UDID"
+
+      - name: Build and run UI tests
+        run: |
+          mkdir -p build
+          status=0
+          xcodebuild test \
+            -project Zipride.xcodeproj \
+            -scheme Zipride \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -resultBundlePath build/Results.xcresult \
+            > build/xcodebuild.log 2>&1 || status=$?
+          grep -E "error:|Test Case|\*\* |XCTAssert|failed" build/xcodebuild.log | head -200 || true
+          exit $status
+
+      - name: Export screenshots
+        if: always()
+        run: |
+          mkdir -p build/screenshots
+          if [ -d build/Results.xcresult ]; then
+            xcrun xcresulttool export attachments --path build/Results.xcresult --output-path build/screenshots || true
+            ls -la build/screenshots
+            cat build/screenshots/manifest.json || true
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zipride-results
+          path: |
+            build/screenshots
+            build/xcodebuild.log
