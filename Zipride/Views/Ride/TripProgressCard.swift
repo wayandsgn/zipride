@@ -63,7 +63,6 @@ struct TripProgressCard: View {
         }
         .padding(18)
         .mapPanel()
-        .accessibilityIdentifier("tripCard")
         .alert("Viagem compartilhada", isPresented: $showShare) {
             Button("OK", role: .cancel) {}
         } message: {

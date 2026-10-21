@@ -52,7 +52,6 @@ struct ReceiptView: View {
         }
         .navigationTitle("Recibo")
         .navigationBarTitleDisplayMode(.inline)
-        .accessibilityIdentifier("receipt")
         .alert("Ajuda Zipride", isPresented: $showHelp) {
             Button("OK", role: .cancel) {}
         } message: {

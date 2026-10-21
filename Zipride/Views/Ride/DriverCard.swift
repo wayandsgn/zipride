@@ -23,7 +23,6 @@ struct DriverCard: View {
         }
         .padding(18)
         .mapPanel()
-        .accessibilityIdentifier("driverCard")
         .sensoryFeedback(.success, trigger: arrived)
         .sheet(isPresented: $store.showChat) {
             ChatSheet()

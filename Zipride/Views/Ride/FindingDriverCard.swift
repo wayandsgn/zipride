@@ -36,7 +36,6 @@ struct FindingDriverCard: View {
         }
         .padding(18)
         .mapPanel()
-        .accessibilityIdentifier("findingDriver")
         .onAppear { sweep = true }
     }
 
