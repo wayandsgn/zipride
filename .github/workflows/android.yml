@@ -1,0 +1,99 @@
+name: Android build and emulator test
+
+on:
+  push:
+    branches: [main]
+    paths: ['app/**', 'scripts/**', '.github/workflows/android.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check image URLs
+        continue-on-error: true
+        run: |
+          mkdir -p app/screenshots
+          ./scripts/check-urls.sh | tee app/screenshots/urls.txt
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+
+      - name: Analyze and unit test
+        working-directory: app
+        run: |
+          flutter pub get
+          flutter analyze 2>&1 | tee screenshots/analyze.log
+          flutter test 2>&1 | tee screenshots/test.log
+
+      - name: Build APK
+        working-directory: app
+        run: |
+          flutter build apk --release 2>&1 | tail -20
+          cp build/app/outputs/flutter-apk/app-release.apk screenshots/zipride.apk
+          ls -la screenshots/zipride.apk
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run on Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: ./scripts/android-drive.sh
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zipride-android
+          path: app/screenshots
+
+      - name: Publish APK as a release
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete android-preview --yes --cleanup-tag || true
+          gh release create android-preview app/screenshots/zipride.apk \
+            --title "Zipride Android (prévia)" \
+            --notes "APK de teste gerado pelo CI a partir de ${GITHUB_SHA::7}. Instale no celular Android permitindo apps de fontes desconhecidas." \
+            --prerelease
+
+      - name: Publish results to ci-results-android branch
+        if: always()
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          OUT=$RUNNER_TEMP/out
+          mkdir -p "$OUT"
+          cp -r app/screenshots/. "$OUT/" || true
+          cd "$OUT"
+          git init -q -b ci-results-android
+          git -c user.name=ci -c user.email=ci@zipride.app add -A
+          git -c user.name=ci -c user.email=ci@zipride.app commit -qm "Android CI results ${GITHUB_SHA}"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci-results-android

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Fails if any Unsplash image referenced in the app does not answer HTTP 200.
+# Fails if any Unsplash image referenced in the iOS or Flutter app does not answer HTTP 200.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-ids=$(grep -rhoE 'photo-[0-9]+-[0-9a-f]+' Zipride | sort -u)
+ids=$(grep -rhoE 'photo-[0-9]+-[0-9a-f]+' Zipride app/lib | sort -u)
 fail=0
 for id in $ids; do
   url="https://images.unsplash.com/${id}?w=800&q=80&fit=crop"

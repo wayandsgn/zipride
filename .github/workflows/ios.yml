@@ -3,6 +3,7 @@ name: iOS build and UI test
 on:
   push:
     branches: [main]
+    paths: ['Zipride/**', 'ZiprideUITests/**', 'project.yml', '.github/workflows/ios.yml']
   workflow_dispatch:
 
 permissions:
