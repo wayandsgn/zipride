@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-test:
     runs-on: macos-26
@@ -14,7 +17,9 @@ jobs:
 
       - name: Check image URLs
         continue-on-error: true
-        run: ./scripts/check-urls.sh
+        run: |
+          mkdir -p build
+          ./scripts/check-urls.sh | tee build/urls.txt
 
       - name: Select Xcode
         run: |
@@ -75,3 +80,32 @@ jobs:
           path: |
             build/screenshots
             build/xcodebuild.log
+
+      - name: Publish results to ci-results branch
+        if: always()
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          OUT=$RUNNER_TEMP/out
+          mkdir -p "$OUT"
+          if [ -f build/screenshots/manifest.json ]; then
+            python3 - "$OUT" <<'PY'
+          import json, shutil, sys, re
+          out = sys.argv[1]
+          for test in json.load(open("build/screenshots/manifest.json")):
+              for a in test.get("attachments", []):
+                  name = a["suggestedHumanReadableName"]
+                  if not a["exportedFileName"].endswith(".png") or not re.match(r"\d\d ", name):
+                      continue
+                  clean = re.sub(r"_0_[0-9A-F-]+\.png$", ".png", name).replace(" ", "-")
+                  shutil.copy("build/screenshots/" + a["exportedFileName"], out + "/" + clean)
+          PY
+          fi
+          cp build/urls.txt "$OUT/" 2>/dev/null || true
+          grep -E "error:|warning: .*Zipride/|Test Case|\*\* |failed|XCTAssert" build/xcodebuild.log | head -300 > "$OUT/summary.txt" || true
+          xcrun xcresulttool get test-results summary --path build/Results.xcresult > "$OUT/test-summary.json" 2>&1 || true
+          cd "$OUT"
+          git init -q -b ci-results
+          git -c user.name=ci -c user.email=ci@zipride.app add -A
+          git -c user.name=ci -c user.email=ci@zipride.app commit -qm "CI results ${GITHUB_SHA}"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" ci-results
