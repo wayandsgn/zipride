@@ -1,0 +1,7 @@
+Test Case '-[ZiprideUITests.FlowUITests testFullRideFlow]' started.
+<unknown>:0: error: -[ZiprideUITests.FlowUITests testFullRideFlow] : Failed to launch <XCUIApplicationImpl: 0x600001748780 app.zipride.Zipride at /Users/runner/Library/Developer/Xcode/DerivedData/Zipride-cvoxgdqrkaguvdcwshhnxfivysby/Build/Products/Debug-iphonesimulator/Zipride.app> via Xcode: Timed out while launching application via Xcode.
+Test Case '-[ZiprideUITests.FlowUITests testFullRideFlow]' failed (72.388 seconds).
+Test Suite 'FlowUITests' failed at 2026-10-21 18:07:02.958.
+Test Suite 'ZiprideUITests.xctest' failed at 2026-10-21 18:07:02.961.
+Test Suite 'All tests' failed at 2026-10-21 18:07:02.961.
+** TEST FAILED **

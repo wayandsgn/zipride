@@ -1,0 +1,49 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "B34C2F57-B98B-4C84-96E2-3170887BA2DB",
+        "deviceName" : "iPhone 17 Pro",
+        "modelName" : "iPhone 17 Pro",
+        "osBuildNumber" : "23C54",
+        "osVersion" : "26.2",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 1,
+      "passedTests" : 0,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "Zipride · Built with macOS 26.6.2",
+  "expectedFailures" : 0,
+  "failedTests" : 1,
+  "finishTime" : 1792606089.398,
+  "passedTests" : 0,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1792605688.051,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "Failed to launch <XCUIApplicationImpl: 0x600001748780 app.zipride.Zipride at /Users/runner/Library/Developer/Xcode/DerivedData/Zipride-cvoxgdqrkaguvdcwshhnxfivysby/Build/Products/Debug-iphonesimulator/Zipride.app> via Xcode: Timed out while launching application via Xcode.",
+      "targetName" : "ZiprideUITests",
+      "testIdentifier" : 1,
+      "testIdentifierString" : "FlowUITests/testFullRideFlow()",
+      "testIdentifierURL" : "test://com.apple.xcode/Zipride/ZiprideUITests/FlowUITests/testFullRideFlow",
+      "testName" : "testFullRideFlow()"
+    }
+  ],
+  "title" : "Test - Zipride",
+  "topInsights" : [
+
+  ],
+  "totalTestCount" : 1
+}
