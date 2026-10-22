@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 
 import '../core/ride_store.dart';
 
-/// Muted CARTO light basemap shared by every map. Hidden when the store turns tiles off (tests).
+/// Public OpenStreetMap tiles for this low-traffic demo. Hidden in widget tests.
 class MapTiles extends StatelessWidget {
   const MapTiles({super.key});
 
@@ -11,9 +11,7 @@ class MapTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     if (!StoreScope.read(context).showMapTiles) return const SizedBox.shrink();
     return TileLayer(
-      urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-      subdomains: const ['a', 'b', 'c', 'd'],
-      retinaMode: RetinaMode.isHighDensity(context),
+      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
       userAgentPackageName: 'app.zipride.zipride',
       maxZoom: 19,
     );

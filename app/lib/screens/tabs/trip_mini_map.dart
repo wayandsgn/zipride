@@ -31,6 +31,13 @@ class TripMiniMap extends StatelessWidget {
             Marker(point: Fixtures.pickup, width: 12, height: 12, child: _end(circle: true)),
             Marker(point: destination.point, width: 12, height: 12, child: _end(circle: false)),
           ]),
+          const Align(
+            alignment: Alignment.bottomRight,
+            child: ColoredBox(
+              color: Color(0xE6FFFFFF),
+              child: Text('© OpenStreetMap contributors', style: TextStyle(fontSize: 9, color: Color(0xFF404040))),
+            ),
+          ),
         ],
       ),
     );

@@ -27,8 +27,10 @@ async function readyApp() {
 
 try {
   console.log('Opening release app');
+  const mapLoaded = page.waitForResponse(response => response.url().startsWith('https://tile.openstreetmap.org/') && response.ok());
   await page.goto(base);
   let app = await readyApp();
+  await mapLoaded;
   assert.equal(await page.title(), 'Zipride — Demonstração interativa');
   await page.screenshot({ path: `${output}/01-desktop.png`, fullPage: true });
 
@@ -78,7 +80,7 @@ try {
     await page.screenshot({ path: `${output}/05-width-${width}.png`, fullPage: true });
   }
   assert.deepEqual(errors, [], 'Unhandled browser errors');
-  console.log('Web demo passed: release app, full ride, chat, rating, receipt, reset, sharing, and 4 viewport sizes.');
+  console.log('Web demo passed: map tiles, release app, full ride, chat, rating, receipt, reset, sharing, and 4 viewport sizes.');
 } catch (error) {
   await page.screenshot({ path: `${output}/failure.png`, fullPage: true });
   await writeFile(`${output}/failure-dom.html`, await page.content());
