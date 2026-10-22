@@ -5,7 +5,7 @@ import 'web/demo_hub.dart';
 
 /// Browser demo: customer app, driver app and admin panel on one page.
 void main() => runApp(MaterialApp(
-      title: 'Zipride · Demonstração',
+      title: 'ITAX · Demonstração',
       debugShowCheckedModeBanner: false,
       theme: ZTheme.data(),
       locale: ZTheme.locale,

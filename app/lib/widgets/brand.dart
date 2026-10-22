@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../core/theme.dart';
 
-/// Original Zipride mark: a "Z" drawn as a route with a pickup dot at its start
-/// and a destination square at its end, set in a rounded black tile.
-class ZiprideMark extends StatelessWidget {
-  const ZiprideMark({super.key, this.size = 32});
+/// ITAX mark: an "X" drawn as two crossing routes on a green tile, with a white
+/// pickup dot at one end and a destination square at the other.
+class ItaxMark extends StatelessWidget {
+  const ItaxMark({super.key, this.size = 32});
   final double size;
 
   @override
@@ -16,27 +16,18 @@ class _MarkPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final s = size.width;
-    canvas.drawRRect(RRect.fromRectAndRadius(Offset.zero & size, Radius.circular(s * 0.28)), Paint()..color = Colors.black);
-    final inset = s * 0.24, w = s - inset * 2;
-    Offset p(double x, double y) => Offset(inset + w * x, inset + w * y);
-    final path = Path()
-      ..moveTo(p(0.02, 0.05).dx, p(0.02, 0.05).dy)
-      ..lineTo(p(0.95, 0.05).dx, p(0.95, 0.05).dy)
-      ..quadraticBezierTo(p(0.55, 0.45).dx, p(0.55, 0.45).dy, p(0.05, 0.95).dx, p(0.05, 0.95).dy)
-      ..lineTo(p(0.98, 0.95).dx, p(0.98, 0.95).dy);
-    canvas.drawPath(
-      path,
-      Paint()
-        ..color = ZTheme.accent
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = s * 0.12
-        ..strokeCap = StrokeCap.round
-        ..strokeJoin = StrokeJoin.round,
-    );
-    canvas.drawCircle(Offset(s * 0.25, s * 0.27), s * 0.085, Paint()..color = Colors.white);
+    canvas.drawRRect(RRect.fromRectAndRadius(Offset.zero & size, Radius.circular(s * 0.28)), Paint()..color = ZTheme.accent);
+    final stroke = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = s * 0.13
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(Offset(s * 0.27, s * 0.27), Offset(s * 0.73, s * 0.73), stroke);
+    canvas.drawLine(Offset(s * 0.73, s * 0.27), Offset(s * 0.27, s * 0.73), stroke);
+    canvas.drawCircle(Offset(s * 0.27, s * 0.27), s * 0.1, Paint()..color = Colors.white);
     canvas.drawRRect(
-      RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(s * 0.75, s * 0.73), width: s * 0.15, height: s * 0.15), Radius.circular(s * 0.03)),
-      Paint()..color = ZTheme.sun,
+      RRect.fromRectAndRadius(Rect.fromCenter(center: Offset(s * 0.73, s * 0.73), width: s * 0.17, height: s * 0.17), Radius.circular(s * 0.03)),
+      Paint()..color = Colors.white,
     );
   }
 
@@ -45,19 +36,19 @@ class _MarkPainter extends CustomPainter {
 }
 
 /// Mark plus wordmark, used in headers.
-class ZiprideWordmark extends StatelessWidget {
-  const ZiprideWordmark({super.key, this.size = 28});
+class ItaxWordmark extends StatelessWidget {
+  const ItaxWordmark({super.key, this.size = 28});
   final double size;
 
   @override
   Widget build(BuildContext context) {
     return Semantics(
-      label: 'Zipride',
+      label: 'ITAX',
       excludeSemantics: true,
       child: Row(mainAxisSize: MainAxisSize.min, children: [
-        ZiprideMark(size: size),
+        ItaxMark(size: size),
         const SizedBox(width: 8),
-        Text('zipride', style: TextStyle(fontSize: size * 0.78, fontWeight: FontWeight.w900, letterSpacing: -0.6, color: Colors.black)),
+        Text('ITAX', style: TextStyle(fontSize: size * 0.8, fontWeight: FontWeight.w900, letterSpacing: 0.4, color: ZTheme.ink)),
       ]),
     );
   }
@@ -87,7 +78,7 @@ class MercosulPlate extends StatelessWidget {
           SizedBox(
             height: 24,
             child: Center(
-              child: Text(text, style: const TextStyle(fontFamily: 'monospace', fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 0.5)),
+              child: Text(text, style: const TextStyle(fontFamily: 'monospace', fontSize: 16, fontWeight: FontWeight.w800, letterSpacing: 0.5, color: Colors.black)),
             ),
           ),
         ]),

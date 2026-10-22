@@ -104,14 +104,14 @@ class _HomeMapState extends State<HomeMap> with TickerProviderStateMixin {
         const MapTiles(),
         if (store.visibleRoute.length > 1)
           PolylineLayer(polylines: [
-            Polyline(points: store.visibleRoute, color: Colors.black, strokeWidth: 5, strokeCap: StrokeCap.round, strokeJoin: StrokeJoin.round),
+            Polyline(points: store.visibleRoute, color: routeColor, strokeWidth: 5, strokeCap: StrokeCap.round, strokeJoin: StrokeJoin.round),
           ]),
         MarkerLayer(markers: _markers(store)),
         const Align(
           alignment: Alignment(1, -0.62),
           child: Padding(
             padding: EdgeInsets.only(right: 6),
-            child: Text('© OpenStreetMap', style: TextStyle(fontSize: 9, color: Color(0x99000000))),
+            child: Text('© OpenStreetMap', style: TextStyle(fontSize: 9, color: Color(0x99FFFFFF))),
           ),
         ),
       ],

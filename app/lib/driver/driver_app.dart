@@ -7,7 +7,7 @@ import '../widgets/glass_tab_bar.dart';
 import 'driver_home.dart';
 import 'driver_tabs.dart';
 
-/// Zipride Motorista: the driver's side of a ride.
+/// ITAX Motorista: the driver's side of a ride.
 class DriverApp extends StatelessWidget {
   const DriverApp({super.key, required this.store});
 
@@ -18,7 +18,7 @@ class DriverApp extends StatelessWidget {
     return DriverScope(
       store: store,
       child: MaterialApp(
-        title: 'Zipride Motorista',
+        title: 'ITAX Motorista',
         debugShowCheckedModeBanner: false,
         theme: ZTheme.data(),
         locale: ZTheme.locale,

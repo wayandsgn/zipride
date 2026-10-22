@@ -77,7 +77,7 @@ class PrimaryButton extends StatelessWidget {
           height: 56,
           alignment: Alignment.center,
           decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(14)),
-          child: Text(label, style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600)),
+          child: Text(label, style: TextStyle(color: ZTheme.textOn(color), fontSize: 17, fontWeight: FontWeight.w600)),
         ),
       ),
     );
@@ -120,9 +120,9 @@ class MapPanel extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 8),
       padding: padding,
       decoration: BoxDecoration(
-        color: ZTheme.surface,
+        color: ZTheme.card,
         borderRadius: BorderRadius.circular(ZTheme.sheetRadius),
-        boxShadow: const [BoxShadow(color: Color(0x24000000), blurRadius: 30, offset: Offset(0, 6))],
+        boxShadow: const [BoxShadow(color: Color(0x80000000), blurRadius: 30, offset: Offset(0, 6))],
       ),
       child: child,
     );
@@ -160,7 +160,7 @@ class RemoteAvatar extends StatelessWidget {
       height: size,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.white,
+        color: ZTheme.card,
         boxShadow: [BoxShadow(color: Color(0x1F000000), blurRadius: 6, offset: Offset(0, 2))],
       ),
       padding: const EdgeInsets.all(2),
@@ -205,7 +205,7 @@ class CircleIconButton extends StatelessWidget {
         width: 44,
         height: 44,
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: ZTheme.card,
           shape: BoxShape.circle,
           boxShadow: [BoxShadow(color: Color(0x26000000), blurRadius: 10, offset: Offset(0, 2))],
         ),
@@ -260,7 +260,7 @@ class _AppleAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Material(
-        color: const Color(0xF7FAFAFA),
+        color: const Color(0xF7161618),
         borderRadius: BorderRadius.circular(16),
         clipBehavior: Clip.antiAlias,
         child: SizedBox(
@@ -314,7 +314,7 @@ Future<T?> showZSheet<T>(BuildContext context, WidgetBuilder builder, {bool expa
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
-    backgroundColor: Colors.white,
+    backgroundColor: ZTheme.card,
     barrierColor: const Color(0x52000000),
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(ZTheme.sheetRadius))),
     builder: (context) => expand

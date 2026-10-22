@@ -12,7 +12,7 @@ import 'pages/rides_page.dart';
 import 'pages/support_page.dart';
 import 'pages/system_page.dart';
 
-/// Zipride Admin: the panel for the operations, support and developer team.
+/// ITAX Admin: the panel for the operations, support and developer team.
 class AdminApp extends StatelessWidget {
   const AdminApp({super.key, required this.store});
 
@@ -23,7 +23,7 @@ class AdminApp extends StatelessWidget {
     return AdminScope(
       store: store,
       child: MaterialApp(
-        title: 'Zipride Admin',
+        title: 'ITAX Admin',
         debugShowCheckedModeBanner: false,
         theme: ZTheme.data(),
         locale: ZTheme.locale,
@@ -66,7 +66,7 @@ class _AdminShell extends StatelessWidget {
     return LayoutBuilder(builder: (context, c) {
       final wide = c.maxWidth >= 900;
       final content = ColoredBox(
-        color: const Color(0xFFF7F7F9),
+        color: ZTheme.surface,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 200),
           child: KeyedSubtree(key: ValueKey(store.page), child: _page(store.page)),
@@ -82,9 +82,9 @@ class _AdminShell extends StatelessWidget {
         );
       }
       return Scaffold(
-        appBar: AppBar(title: Text(store.page.label), backgroundColor: Colors.white),
+        appBar: AppBar(title: Text(store.page.label), backgroundColor: ZTheme.surface),
         drawer: Drawer(
-          backgroundColor: ZTheme.fill,
+          backgroundColor: ZTheme.surface,
           child: Builder(builder: (context) => _Sidebar(icons: _icons, onPicked: () => Navigator.of(context).pop())),
         ),
         body: content,
@@ -113,7 +113,7 @@ class _Sidebar extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 22, 20, 18),
             child: Row(children: [
-              ZiprideWordmark(size: 26),
+              ItaxWordmark(size: 26),
               SizedBox(width: 8),
               Text('Admin', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: ZTheme.secondary)),
             ]),
@@ -122,7 +122,7 @@ class _Sidebar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
               child: Material(
-                color: store.page == p ? Colors.white : Colors.transparent,
+                color: store.page == p ? ZTheme.fill2 : Colors.transparent,
                 borderRadius: BorderRadius.circular(10),
                 child: InkWell(
                   key: ValueKey('nav_${p.name}'),
@@ -152,11 +152,11 @@ class _Sidebar extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(16),
             child: Row(children: [
-              CircleAvatar(radius: 17, backgroundColor: ZTheme.accent, child: Text('EZ', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700))),
+              CircleAvatar(radius: 17, backgroundColor: ZTheme.accent, child: Text('EI', style: TextStyle(color: ZTheme.onInk, fontSize: 12, fontWeight: FontWeight.w700))),
               SizedBox(width: 10),
               Expanded(
                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text('Equipe Zipride', style: TextStyle(fontWeight: FontWeight.w700)),
+                  Text('Equipe ITAX', style: TextStyle(fontWeight: FontWeight.w700)),
                   Text('Operações, suporte e dev', style: ZText.caption),
                 ]),
               ),

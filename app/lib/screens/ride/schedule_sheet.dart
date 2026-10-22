@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import '../../core/formatters.dart';
 import '../../core/ride_store.dart';
@@ -90,11 +89,11 @@ class _ScheduleSheetState extends State<ScheduleSheet> {
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: on ? Colors.black : Colors.white,
-                  border: Border.all(color: on ? Colors.black : ZTheme.hairline),
+                  color: on ? ZTheme.ink : ZTheme.card,
+                  border: Border.all(color: on ? ZTheme.ink : ZTheme.hairline),
                   borderRadius: BorderRadius.circular(99),
                 ),
-                child: Text(BR.time(slot), style: TextStyle(fontWeight: FontWeight.w600, color: on ? Colors.white : ZTheme.ink, fontFeatures: ZText.tabular)),
+                child: Text(BR.time(slot), style: TextStyle(fontWeight: FontWeight.w600, color: on ? ZTheme.onInk : ZTheme.ink, fontFeatures: ZText.tabular)),
               ),
             );
           },

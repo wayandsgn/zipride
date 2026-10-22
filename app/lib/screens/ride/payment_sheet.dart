@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import '../../core/models.dart';
 import '../../core/ride_store.dart';
@@ -47,8 +46,8 @@ class PaymentRow extends StatelessWidget {
         duration: const Duration(milliseconds: 220),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: selected ? Colors.black : ZTheme.hairline, width: selected ? 1.5 : 1),
+          color: ZTheme.card,
+          border: Border.all(color: selected ? ZTheme.ink : ZTheme.hairline, width: selected ? 1.5 : 1),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Row(children: [
@@ -57,7 +56,7 @@ class PaymentRow extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(color: selected ? ZTheme.accent : ZTheme.accentSoft, borderRadius: BorderRadius.circular(12)),
-            child: Icon(paymentIcon(method), size: 19, color: selected ? Colors.white : ZTheme.accent),
+            child: Icon(paymentIcon(method), size: 19, color: selected ? ZTheme.onInk : ZTheme.accent),
           ),
           const SizedBox(width: 14),
           Expanded(

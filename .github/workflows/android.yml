@@ -47,8 +47,8 @@ jobs:
         working-directory: app
         run: |
           flutter build apk --release 2>&1 | tail -20
-          cp build/app/outputs/flutter-apk/app-release.apk screenshots/zipride.apk
-          ls -la screenshots/zipride.apk
+          cp build/app/outputs/flutter-apk/app-release.apk screenshots/itax.apk
+          ls -la screenshots/itax.apk
 
       - name: Enable KVM
         run: |
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: zipride-android
+          name: itax-android
           path: app/screenshots
 
       - name: Publish APK as a release
@@ -79,8 +79,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release delete android-preview --yes --cleanup-tag || true
-          gh release create android-preview app/screenshots/zipride.apk \
-            --title "Zipride Android (prévia)" \
+          gh release create android-preview app/screenshots/itax.apk \
+            --title "ITAX Android (prévia)" \
             --notes "APK de teste gerado pelo CI a partir de ${GITHUB_SHA::7}. Instale no celular Android permitindo apps de fontes desconhecidas." \
             --prerelease
 

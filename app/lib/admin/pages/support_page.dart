@@ -51,7 +51,7 @@ class _SupportPageState extends State<SupportPage> {
             subtitle: Text('${t.id} · ${t.author} · ${t.role}', maxLines: 1, overflow: TextOverflow.ellipsis),
             trailing: t.resolved
                 ? const StatusPill('Resolvido', ZTheme.accent)
-                : StatusPill(t.priority, t.priority == 'Alta' ? ZTheme.danger : (t.priority == 'Média' ? const Color(0xFFB7791F) : ZTheme.secondary)),
+                : StatusPill(t.priority, t.priority == 'Alta' ? ZTheme.danger : (t.priority == 'Média' ? const Color(0xFFE0A030) : ZTheme.secondary)),
             onTap: () => setState(() => _openId = t.id),
           ),
       ]),
@@ -78,8 +78,8 @@ class _SupportPageState extends State<SupportPage> {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(color: m.fromTeam ? ZTheme.accent : ZTheme.fill, borderRadius: BorderRadius.circular(16)),
               child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                Text(m.text, style: TextStyle(fontSize: 15, color: m.fromTeam ? Colors.white : ZTheme.ink)),
-                Text(BR.time(m.time), style: TextStyle(fontSize: 11, color: m.fromTeam ? Colors.white70 : ZTheme.secondary)),
+                Text(m.text, style: TextStyle(fontSize: 15, color: m.fromTeam ? ZTheme.onInk : ZTheme.ink)),
+                Text(BR.time(m.time), style: TextStyle(fontSize: 11, color: m.fromTeam ? Colors.black54 : ZTheme.secondary)),
               ]),
             ),
           ),

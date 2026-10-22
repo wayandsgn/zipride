@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart';
 import '../core/driver_store.dart';
 import '../core/geo.dart';
 import '../core/models.dart';
+import '../core/theme.dart';
 import '../widgets/map_tiles.dart';
 import '../widgets/markers.dart';
 
@@ -87,12 +88,12 @@ class _DriverMapState extends State<DriverMap> with SingleTickerProviderStateMix
           if (showApproach)
             Polyline(
               points: phase == DriverPhase.toPickup ? Geo.prefix(store.approach.reversed.toList(), 1 - store.progress).reversed.toList() : store.approach,
-              color: const Color(0xFF2978FF),
+              color: ZTheme.youBlue,
               strokeWidth: 5,
               strokeCap: StrokeCap.round,
               strokeJoin: StrokeJoin.round,
             ),
-          if (showTrip) Polyline(points: store.tripRoute, color: Colors.black, strokeWidth: 5, strokeCap: StrokeCap.round, strokeJoin: StrokeJoin.round),
+          if (showTrip) Polyline(points: store.tripRoute, color: routeColor, strokeWidth: 5, strokeCap: StrokeCap.round, strokeJoin: StrokeJoin.round),
         ]),
         MarkerLayer(markers: [
           if (r != null && phase != DriverPhase.onTrip && phase != DriverPhase.finished)
@@ -118,7 +119,7 @@ class _DriverMapState extends State<DriverMap> with SingleTickerProviderStateMix
           alignment: Alignment(1, -0.62),
           child: Padding(
             padding: EdgeInsets.only(right: 6),
-            child: Text('© OpenStreetMap', style: TextStyle(fontSize: 9, color: Color(0x99000000))),
+            child: Text('© OpenStreetMap', style: TextStyle(fontSize: 9, color: Color(0x99FFFFFF))),
           ),
         ),
       ],

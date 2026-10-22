@@ -21,7 +21,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = StoreScope.of(context);
-    return LargeTitlePage(title: 'Conta', background: ZTheme.fill, children: [
+    return LargeTitlePage(title: 'Conta', background: ZTheme.surface, children: [
       const GroupSection(children: [_Profile()]),
       Padding(
         padding: const EdgeInsets.only(bottom: 22),
@@ -39,7 +39,7 @@ class AccountScreen extends StatelessWidget {
         ]),
       ),
       GroupSection(children: [
-        NavRow(key: const ValueKey('walletLink'), icon: CupertinoIcons.creditcard_fill, title: 'Carteira', subtitle: 'Pix, cartões e saldo Zipride', onTap: () => _push(context, const WalletPage())),
+        NavRow(key: const ValueKey('walletLink'), icon: CupertinoIcons.creditcard_fill, title: 'Carteira', subtitle: 'Pix, cartões e saldo ITAX', onTap: () => _push(context, const WalletPage())),
         NavRow(key: const ValueKey('savedLink'), icon: CupertinoIcons.map_pin_ellipse, title: 'Lugares salvos', subtitle: 'Casa e Trabalho', onTap: () => _push(context, const SavedPlacesPage())),
         NavRow(key: const ValueKey('settingsLink'), icon: CupertinoIcons.gear_solid, title: 'Configurações', subtitle: 'Notificações, privacidade e conta', onTap: () => _push(context, const SettingsPage())),
       ]),
@@ -47,8 +47,8 @@ class AccountScreen extends StatelessWidget {
         NavRow(icon: CupertinoIcons.gift_fill, title: 'Convide amigos', subtitle: 'Ganhe R\$ 10 na próxima viagem', chevron: false, onTap: () {
           showNotice(context, 'Seu código: DAVI10', 'Quem usar seu código ganha R\$ 10 na primeira viagem, e você também.');
         }),
-        NavRow(icon: CupertinoIcons.question_circle_fill, title: 'Ajuda', subtitle: 'Fale com o suporte Zipride', chevron: false, onTap: () {
-          showNotice(context, 'Ajuda Zipride', 'O suporte responde pelo chat em até 5 minutos, todos os dias.');
+        NavRow(icon: CupertinoIcons.question_circle_fill, title: 'Ajuda', subtitle: 'Fale com o suporte ITAX', chevron: false, onTap: () {
+          showNotice(context, 'Ajuda ITAX', 'O suporte responde pelo chat em até 5 minutos, todos os dias.');
         }),
       ]),
       GroupSection(children: [
@@ -107,7 +107,7 @@ class _Tile extends StatelessWidget {
         scale: 0.95,
         child: Container(
           height: 78,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16)),
+          decoration: BoxDecoration(color: ZTheme.card, borderRadius: BorderRadius.circular(16)),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(icon, size: 22),
             const SizedBox(height: 8),

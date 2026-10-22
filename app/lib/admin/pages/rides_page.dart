@@ -86,7 +86,7 @@ class _RidesPageState extends State<RidesPage> {
               ]),
             );
         return Dialog(
-          backgroundColor: Colors.white,
+          backgroundColor: ZTheme.card,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 480),

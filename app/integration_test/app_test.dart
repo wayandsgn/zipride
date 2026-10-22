@@ -37,9 +37,9 @@ void main() {
     await wait(tester, 600);
   }
 
-  testWidgets('Zipride demo on Android', (tester) async {
+  testWidgets('ITAX demo on Android', (tester) async {
     final store = RideStore(timeScale: 1.5);
-    await tester.pumpWidget(ZiprideApp(store: store));
+    await tester.pumpWidget(ItaxApp(store: store));
     if (Platform.isAndroid) await binding.convertFlutterSurfaceToImage();
     await wait(tester, 4000); // map tiles and photos load
     await snap(tester, 'inicio');

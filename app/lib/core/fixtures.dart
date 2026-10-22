@@ -19,7 +19,7 @@ class Fixtures {
   static const userRating = 4.89;
   static const userTrips = 128;
   static const userPhone = '(88) 99812-4417';
-  static const userEmail = 'davi.filipe@zipride.app';
+  static const userEmail = 'davi.filipe@itax.app';
   static final userPhotoUrl = image('photo-1507003211169-0a1dd7228f2d');
 
   static final driver = Driver('Marcos', 4.92, 2341, 'Chevrolet Onix · Prata', 'PNX4E21', image('photo-1500648767791-00dcc994a43e'));
@@ -63,7 +63,7 @@ class Fixtures {
   // MARK: Rides
 
   static const rideTypes = [
-    RideType(id: 'x', name: 'ZiprideX', tagline: 'Viagens do dia a dia', seats: 4, etaMinutes: 3, basePrice: 9.90, perKm: 1.45, kind: VehicleKind.car, color: Color(0xFFEBEBEB)),
+    RideType(id: 'x', name: 'ITAX Go', tagline: 'Viagens do dia a dia', seats: 4, etaMinutes: 3, basePrice: 9.90, perKm: 1.45, kind: VehicleKind.car, color: Color(0xFFEBEBEB)),
     RideType(id: 'moto', name: 'Moto', tagline: 'Chega mais rápido', seats: 1, etaMinutes: 2, basePrice: 5.90, perKm: 0.85, kind: VehicleKind.moto, color: ZTheme.accent),
     RideType(id: 'comfort', name: 'Comfort', tagline: 'Carros novos e mais espaço', seats: 4, etaMinutes: 4, basePrice: 13.50, perKm: 1.95, kind: VehicleKind.car, color: Color(0xFF8C9EB3)),
     RideType(id: 'xl', name: 'XL', tagline: 'Para até 6 pessoas', seats: 6, etaMinutes: 6, basePrice: 17.80, perKm: 2.50, kind: VehicleKind.car, color: Color(0xFF59667A)),
@@ -121,10 +121,10 @@ class Fixtures {
   // MARK: History
 
   static final pastTrips = [
-    Trip(id: 't1', date: BR.fortaleza(2026, 10, 19, 18, 42), pickupName: 'Casa', destination: place('praca'), rideName: 'ZiprideX', driverName: 'Francisca', payment: PaymentMethod.pix, fare: 9.90, tip: 2, rating: 5, distanceKm: 1.1, durationMinutes: 6),
+    Trip(id: 't1', date: BR.fortaleza(2026, 10, 19, 18, 42), pickupName: 'Casa', destination: place('praca'), rideName: 'ITAX Go', driverName: 'Francisca', payment: PaymentMethod.pix, fare: 9.90, tip: 2, rating: 5, distanceKm: 1.1, durationMinutes: 6),
     Trip(id: 't2', date: BR.fortaleza(2026, 10, 17, 7, 55), pickupName: 'Casa', destination: place('ifce'), rideName: 'Moto', driverName: 'Raimundo', payment: PaymentMethod.pix, fare: 5.90, tip: 0, rating: 5, distanceKm: 2.4, durationMinutes: 8),
     Trip(id: 't3', date: BR.fortaleza(2026, 10, 12, 9, 10), pickupName: 'Rodoviária', destination: place('baleia'), rideName: 'Comfort', driverName: 'Antônia', payment: PaymentMethod.visa, fare: 73.80, tip: 5, rating: 4, distanceKm: 33.2, durationMinutes: 41),
-    Trip(id: 't4', date: BR.fortaleza(2026, 10, 5, 20, 15), pickupName: 'Mercado Público', destination: place('facedi'), rideName: 'ZiprideX', driverName: 'Cícero', payment: PaymentMethod.cash, fare: 9.90, tip: 0, rating: 5, distanceKm: 1.9, durationMinutes: 7),
+    Trip(id: 't4', date: BR.fortaleza(2026, 10, 5, 20, 15), pickupName: 'Mercado Público', destination: place('facedi'), rideName: 'ITAX Go', driverName: 'Cícero', payment: PaymentMethod.cash, fare: 9.90, tip: 0, rating: 5, distanceKm: 1.9, durationMinutes: 7),
   ];
 
   // MARK: Images (verified by scripts/check-urls.sh in CI)

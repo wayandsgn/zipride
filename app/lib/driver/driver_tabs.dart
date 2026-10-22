@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 import '../core/driver_store.dart';
 import '../core/fixtures.dart';
@@ -22,10 +21,10 @@ class DriverEarnings extends StatelessWidget {
     final week = [...DriverStore.week]..[_todayIndex] = store.earningsToday;
     final total = week.fold(0.0, (a, b) => a + b);
     final top = week.reduce((a, b) => a > b ? a : b);
-    return LargeTitlePage(title: 'Ganhos', background: ZTheme.fill, children: [
+    return LargeTitlePage(title: 'Ganhos', background: ZTheme.surface, children: [
       Container(
         padding: const EdgeInsets.all(18),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(ZTheme.cardRadius)),
+        decoration: BoxDecoration(color: ZTheme.card, borderRadius: BorderRadius.circular(ZTheme.cardRadius)),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('Esta semana', style: ZText.sub),
           Text(BR.money(total), style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w900, letterSpacing: -0.8, fontFeatures: ZText.tabular)),
@@ -119,7 +118,7 @@ class _DriverAccountState extends State<DriverAccount> {
   @override
   Widget build(BuildContext context) {
     final d = Fixtures.driver;
-    return LargeTitlePage(title: 'Conta', background: ZTheme.fill, children: [
+    return LargeTitlePage(title: 'Conta', background: ZTheme.surface, children: [
       GroupSection(children: [
         Padding(
           padding: const EdgeInsets.all(14),
@@ -143,7 +142,7 @@ class _DriverAccountState extends State<DriverAccount> {
             const Expanded(
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('Chevrolet Onix', style: ZText.bodyStrong),
-                Text('Prata · 2022 · ZiprideX e Comfort', style: ZText.foot),
+                Text('Prata · 2022 · ITAX Go e Comfort', style: ZText.foot),
               ]),
             ),
             MercosulPlate(d.plate),
@@ -153,7 +152,7 @@ class _DriverAccountState extends State<DriverAccount> {
       GroupSection(header: 'Documentos', children: [
         for (final doc in ['CNH com EAR', 'CRLV 2026', 'Antecedentes criminais'])
           NavRow(icon: CupertinoIcons.checkmark_shield_fill, title: doc, subtitle: 'Aprovado', chevron: false, onTap: () {
-            showNotice(context, doc, 'Documento verificado pela equipe Zipride.');
+            showNotice(context, doc, 'Documento verificado pela equipe ITAX.');
           }),
       ]),
       GroupSection(header: 'Preferências', children: [
@@ -162,7 +161,7 @@ class _DriverAccountState extends State<DriverAccount> {
       ]),
       GroupSection(children: [
         NavRow(icon: CupertinoIcons.question_circle_fill, title: 'Suporte ao motorista', subtitle: 'Resposta em até 5 minutos', chevron: false, onTap: () {
-          showNotice(context, 'Suporte Zipride', 'Nossa equipe atende motoristas pelo chat todos os dias, das 6h à meia-noite.');
+          showNotice(context, 'Suporte ITAX', 'Nossa equipe atende motoristas pelo chat todos os dias, das 6h à meia-noite.');
         }),
       ]),
     ]);

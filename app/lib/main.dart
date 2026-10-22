@@ -8,11 +8,11 @@ import 'screens/root.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(ZiprideApp(store: RideStore()));
+  runApp(ItaxApp(store: RideStore()));
 }
 
-class ZiprideApp extends StatelessWidget {
-  const ZiprideApp({super.key, required this.store});
+class ItaxApp extends StatelessWidget {
+  const ItaxApp({super.key, required this.store});
 
   final RideStore store;
 
@@ -21,7 +21,7 @@ class ZiprideApp extends StatelessWidget {
     return StoreScope(
       store: store,
       child: MaterialApp(
-        title: 'Zipride',
+        title: 'ITAX',
         debugShowCheckedModeBanner: false,
         theme: ZTheme.data(),
         locale: ZTheme.locale,
@@ -30,10 +30,10 @@ class ZiprideApp extends StatelessWidget {
         home: const AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
-            statusBarIconBrightness: Brightness.dark,
-            statusBarBrightness: Brightness.light,
-            systemNavigationBarColor: Colors.white,
-            systemNavigationBarIconBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
+            systemNavigationBarColor: Colors.black,
+            systemNavigationBarIconBrightness: Brightness.light,
           ),
           child: RootScreen(),
         ),

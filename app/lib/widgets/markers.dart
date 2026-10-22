@@ -122,15 +122,15 @@ class VehicleMarker extends StatelessWidget {
       width: 14,
       height: 26,
       decoration: BoxDecoration(
-        color: highlighted ? Colors.black : Colors.white,
+        color: highlighted ? ZTheme.ink : ZTheme.card,
         borderRadius: BorderRadius.circular(5),
         boxShadow: [BoxShadow(color: const Color(0x4D000000), blurRadius: highlighted ? 5 : 2, offset: const Offset(0, 1))],
       ),
       child: Column(children: [
         const SizedBox(height: 5),
-        Container(width: 10, height: 6, decoration: BoxDecoration(color: highlighted ? ZTheme.accent : const Color(0xBF000000), borderRadius: BorderRadius.circular(2))),
+        Container(width: 10, height: 6, decoration: BoxDecoration(color: highlighted ? ZTheme.accent : const Color(0xBFFFFFFF), borderRadius: BorderRadius.circular(2))),
         const Spacer(),
-        Container(width: 10, height: 4, decoration: BoxDecoration(color: highlighted ? ZTheme.accent.withValues(alpha: 0.7) : const Color(0x80000000), borderRadius: BorderRadius.circular(2))),
+        Container(width: 10, height: 4, decoration: BoxDecoration(color: highlighted ? ZTheme.accent.withValues(alpha: 0.7) : const Color(0x80FFFFFF), borderRadius: BorderRadius.circular(2))),
         const SizedBox(height: 4),
       ]),
     );
@@ -141,14 +141,14 @@ class VehicleMarker extends StatelessWidget {
       width: 12,
       height: 22,
       child: Stack(alignment: Alignment.center, children: [
-        Container(width: 6, height: 22, decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(3))),
+        Container(width: 6, height: 22, decoration: BoxDecoration(color: ZTheme.ink, borderRadius: BorderRadius.circular(3))),
         Container(width: 9, height: 9, decoration: const BoxDecoration(color: ZTheme.accent, shape: BoxShape.circle)),
       ]),
     );
   }
 }
 
-/// Pickup pin: black circle with a white core.
+/// Pickup pin: white circle with a black core.
 class PickupPin extends StatelessWidget {
   const PickupPin({super.key});
 
@@ -158,17 +158,17 @@ class PickupPin extends StatelessWidget {
       width: 20,
       height: 20,
       decoration: const BoxDecoration(
-        color: Colors.black,
+        color: ZTheme.ink,
         shape: BoxShape.circle,
         boxShadow: [BoxShadow(color: Color(0x4D000000), blurRadius: 3, offset: Offset(0, 1))],
       ),
       alignment: Alignment.center,
-      child: Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle)),
+      child: Container(width: 8, height: 8, decoration: const BoxDecoration(color: ZTheme.onInk, shape: BoxShape.circle)),
     );
   }
 }
 
-/// Destination pin: black square with a white core, with the place name above.
+/// Destination pin: white square with a black core, with the place name above.
 class DestinationPin extends StatelessWidget {
   const DestinationPin({super.key, required this.title});
   final String title;
@@ -180,7 +180,7 @@ class DestinationPin extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 190),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ZTheme.card,
           borderRadius: BorderRadius.circular(99),
           boxShadow: const [BoxShadow(color: Color(0x26000000), blurRadius: 4, offset: Offset(0, 1))],
         ),
@@ -190,9 +190,9 @@ class DestinationPin extends StatelessWidget {
       Container(
         width: 20,
         height: 20,
-        decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(3)),
+        decoration: BoxDecoration(color: ZTheme.ink, borderRadius: BorderRadius.circular(3)),
         alignment: Alignment.center,
-        child: Container(width: 8, height: 8, color: Colors.white),
+        child: Container(width: 8, height: 8, color: ZTheme.onInk),
       ),
     ]);
   }

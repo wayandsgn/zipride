@@ -87,9 +87,9 @@ class _SearchScreenState extends State<SearchScreen> {
         const SizedBox(width: 6),
         Column(children: [
           const SizedBox(height: 18),
-          Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)),
+          Container(width: 8, height: 8, decoration: const BoxDecoration(color: ZTheme.ink, shape: BoxShape.circle)),
           Container(width: 2, height: 36, color: ZTheme.tertiary),
-          Container(width: 8, height: 8, color: Colors.black),
+          Container(width: 8, height: 8, color: ZTheme.ink),
         ]),
         const SizedBox(width: 12),
         Expanded(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/fixtures.dart';
 import '../../core/ride_store.dart';
+import '../../core/theme.dart';
 import '../../widgets/brand.dart';
 import '../../widgets/common.dart';
 import '../ride/driver_card.dart';
@@ -111,11 +112,11 @@ class _Header extends StatelessWidget {
           Container(
             padding: const EdgeInsets.fromLTRB(8, 7, 13, 7),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ZTheme.card,
               borderRadius: BorderRadius.circular(99),
-              boxShadow: const [BoxShadow(color: Color(0x1F000000), blurRadius: 10, offset: Offset(0, 2))],
+              boxShadow: const [BoxShadow(color: Color(0x66000000), blurRadius: 10, offset: Offset(0, 2))],
             ),
-            child: const ZiprideWordmark(size: 28),
+            child: const ItaxWordmark(size: 28),
           ),
         const Spacer(),
         if (store.phase == RidePhase.idle)

@@ -14,7 +14,7 @@ class PhoneFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     final outer = MediaQuery.of(context);
     return Column(mainAxisSize: MainAxisSize.min, children: [
-      Text(label, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFF3A3A3C))),
+      Text(label, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700, color: Color(0xFFB0B0B5))),
       const SizedBox(height: 10),
       Flexible(
         child: FittedBox(
@@ -23,7 +23,7 @@ class PhoneFrame extends StatelessWidget {
             height: screen.height + 24,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF111111),
+              color: const Color(0xFF2A2A2D),
               borderRadius: BorderRadius.circular(60),
               boxShadow: const [BoxShadow(color: Color(0x33000000), blurRadius: 40, offset: Offset(0, 18))],
             ),
@@ -62,7 +62,7 @@ class _StatusBar extends StatelessWidget {
           top: 18,
           child: StreamBuilder<int>(
             stream: Stream.periodic(const Duration(seconds: 20), (i) => i),
-            builder: (context, _) => Text(BR.time(DateTime.now()), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black)),
+            builder: (context, _) => Text(BR.time(DateTime.now()), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white)),
           ),
         ),
         Align(

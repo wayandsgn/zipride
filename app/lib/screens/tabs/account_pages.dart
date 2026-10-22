@@ -11,7 +11,7 @@ import '../../widgets/common.dart';
 import '../../widgets/grouped.dart';
 import '../ride/payment_sheet.dart';
 
-/// Carteira: Zipride balance and the payment method used by default.
+/// Carteira: ITAX balance and the payment method used by default.
 class WalletPage extends StatelessWidget {
   const WalletPage({super.key});
 
@@ -25,7 +25,7 @@ class WalletPage extends StatelessWidget {
           gradient: const LinearGradient(colors: [ZTheme.accent, Colors.black], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Text('Saldo Zipride', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xCCFFFFFF))),
+          const Text('Saldo ITAX', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xCCFFFFFF))),
           const SizedBox(height: 4),
           Text(BR.money(23.50), style: const TextStyle(fontSize: 34, fontWeight: FontWeight.w900, color: Colors.white, fontFeatures: ZText.tabular)),
           const SizedBox(height: 4),

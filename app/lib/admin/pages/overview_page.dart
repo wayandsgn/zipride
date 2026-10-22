@@ -23,7 +23,7 @@ class OverviewPage extends StatelessWidget {
         KpiCard(label: 'Corridas hoje', value: '${store.ridesToday}', icon: CupertinoIcons.car_fill, note: '+12% vs. quarta passada'),
         KpiCard(label: 'Receita hoje', value: BR.money(store.revenueToday), icon: CupertinoIcons.money_dollar_circle_fill, note: '78% via Pix'),
         KpiCard(label: 'Motoristas online', value: '${store.onlineDrivers}', icon: CupertinoIcons.person_2_fill, color: ZTheme.youBlue),
-        KpiCard(label: 'Chamados abertos', value: '${store.openTickets}', icon: CupertinoIcons.chat_bubble_2_fill, color: const Color(0xFFB7791F), note: 'Tempo médio de resposta 4 min'),
+        KpiCard(label: 'Chamados abertos', value: '${store.openTickets}', icon: CupertinoIcons.chat_bubble_2_fill, color: const Color(0xFFE0A030), note: 'Tempo médio de resposta 4 min'),
       ];
       return ListView(padding: const EdgeInsets.all(24), children: [
         PageHeader('Visão geral', subtitle: 'Itapipoca, CE · ${BR.longDate(DateTime.now())}'),
@@ -55,7 +55,7 @@ class OverviewPage extends StatelessWidget {
                             height: 4 + 140.0 * _hourly[h] / 15,
                             margin: const EdgeInsets.symmetric(horizontal: 2),
                             decoration: BoxDecoration(
-                              color: h == now.hour ? ZTheme.accent : (h > now.hour ? ZTheme.fill2 : const Color(0xFF9FD8CE)),
+                              color: h == now.hour ? ZTheme.accent : (h > now.hour ? ZTheme.fill2 : ZTheme.accent.withValues(alpha: 0.45)),
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),

@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import '../../core/fixtures.dart';
 import '../../core/geo.dart';
 import '../../core/models.dart';
+import '../../core/theme.dart';
 import '../../widgets/map_tiles.dart';
 
 /// Static, non-interactive map of the route from the pickup to a destination.
@@ -25,7 +26,7 @@ class TripMiniMap extends StatelessWidget {
         children: [
           const MapTiles(),
           PolylineLayer(polylines: [
-            Polyline(points: route, color: Colors.black, strokeWidth: 4, strokeCap: StrokeCap.round, strokeJoin: StrokeJoin.round),
+            Polyline(points: route, color: routeColor, strokeWidth: 4, strokeCap: StrokeCap.round, strokeJoin: StrokeJoin.round),
           ]),
           MarkerLayer(markers: [
             Marker(point: Fixtures.pickup, width: 12, height: 12, child: _end(circle: true)),
@@ -39,9 +40,9 @@ class TripMiniMap extends StatelessWidget {
   Widget _end({required bool circle}) {
     final radius = BorderRadius.circular(circle ? 6 : 2);
     return Container(
-      decoration: BoxDecoration(color: Colors.black, borderRadius: radius),
+      decoration: BoxDecoration(color: ZTheme.ink, borderRadius: radius),
       alignment: Alignment.center,
-      child: Container(width: 4, height: 4, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(circle ? 2 : 1))),
+      child: Container(width: 4, height: 4, decoration: BoxDecoration(color: ZTheme.onInk, borderRadius: BorderRadius.circular(circle ? 2 : 1))),
     );
   }
 }

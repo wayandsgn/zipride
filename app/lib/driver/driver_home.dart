@@ -75,7 +75,7 @@ class _DriverHomeState extends State<DriverHome> {
                     child: Text(
                       BR.money(store.earningsToday),
                       key: ValueKey(store.earningsToday),
-                      style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w800, fontFeatures: ZText.tabular),
+                      style: const TextStyle(color: ZTheme.onInk, fontSize: 17, fontWeight: FontWeight.w800, fontFeatures: ZText.tabular),
                     ),
                   ),
                 ),
@@ -127,9 +127,9 @@ class _OnlineDot extends StatelessWidget {
       duration: const Duration(milliseconds: 250),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ZTheme.card,
         borderRadius: BorderRadius.circular(99),
-        boxShadow: const [BoxShadow(color: Color(0x1F000000), blurRadius: 10, offset: Offset(0, 2))],
+        boxShadow: const [BoxShadow(color: Color(0x66000000), blurRadius: 10, offset: Offset(0, 2))],
       ),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         AnimatedContainer(

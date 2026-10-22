@@ -49,7 +49,7 @@ class ReceiptScreen extends StatelessWidget {
       }),
       const SizedBox(height: 10),
       SecondaryButton('Preciso de ajuda com esta viagem', key: const ValueKey('tripHelp'), onTap: () {
-        showNotice(context, 'Ajuda Zipride', 'Nosso suporte responde pelo chat em até 5 minutos, todos os dias.');
+        showNotice(context, 'Ajuda ITAX', 'Nosso suporte responde pelo chat em até 5 minutos, todos os dias.');
       }),
     ]);
   }
@@ -65,11 +65,11 @@ class _Route extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.only(top: 6),
         child: Column(children: [
-          Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.black, shape: BoxShape.circle)),
+          Container(width: 8, height: 8, decoration: const BoxDecoration(color: ZTheme.ink, shape: BoxShape.circle)),
           const SizedBox(height: 3),
           Container(width: 2, height: 30, color: ZTheme.tertiary),
           const SizedBox(height: 3),
-          Container(width: 8, height: 8, color: Colors.black),
+          Container(width: 8, height: 8, color: ZTheme.ink),
         ]),
       ),
       const SizedBox(width: 12),

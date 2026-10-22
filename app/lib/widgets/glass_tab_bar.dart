@@ -23,7 +23,7 @@ class GlassTabBar extends StatelessWidget {
           height: 62,
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.86),
+            color: ZTheme.card.withValues(alpha: 0.88),
             borderRadius: BorderRadius.circular(31),
             border: Border.all(color: ZTheme.hairline),
           ),
@@ -44,9 +44,9 @@ class GlassTabBar extends StatelessWidget {
                       borderRadius: BorderRadius.circular(27),
                     ),
                     child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Icon(icon, size: 22, color: selected == i ? ZTheme.accent : const Color(0xFF555555)),
+                      Icon(icon, size: 22, color: selected == i ? ZTheme.accent : ZTheme.secondary),
                       const SizedBox(height: 2),
-                      Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: selected == i ? ZTheme.accent : const Color(0xFF555555))),
+                      Text(label, style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: selected == i ? ZTheme.accent : ZTheme.secondary)),
                     ]),
                   ),
                 ),

@@ -16,7 +16,7 @@ class AdminCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // A Material (not a decorated box) so list tiles inside can paint their highlight.
     return Material(
-      color: Colors.white,
+      color: ZTheme.card,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16), side: const BorderSide(color: ZTheme.hairline)),
       clipBehavior: Clip.antiAlias,
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: [
@@ -91,14 +91,14 @@ Color rideColor(RideStatus s) => switch (s) {
       RideStatus.live => ZTheme.youBlue,
       RideStatus.done => ZTheme.accent,
       RideStatus.cancelled => ZTheme.secondary,
-      RideStatus.refunded => const Color(0xFFB7791F),
+      RideStatus.refunded => const Color(0xFFE0A030),
     };
 
 Color driverColor(DriverStatus s) => switch (s) {
       DriverStatus.online => ZTheme.accent,
       DriverStatus.onTrip => ZTheme.youBlue,
       DriverStatus.offline => ZTheme.secondary,
-      DriverStatus.review => const Color(0xFFB7791F),
+      DriverStatus.review => const Color(0xFFE0A030),
       DriverStatus.blocked => ZTheme.danger,
     };
 
@@ -189,7 +189,7 @@ class _HoverRowState extends State<_HoverRow> {
         onTap: widget.onTap,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 120),
-          color: _hover && widget.onTap != null ? const Color(0xFFF7F7FA) : Colors.white,
+          color: _hover && widget.onTap != null ? ZTheme.fill : ZTheme.card,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
           child: widget.child,
         ),
@@ -212,8 +212,8 @@ class FilterChipZ extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(color: selected ? ZTheme.ink : Colors.white, borderRadius: BorderRadius.circular(99), border: Border.all(color: selected ? ZTheme.ink : ZTheme.hairline)),
-        child: Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: selected ? Colors.white : ZTheme.ink)),
+        decoration: BoxDecoration(color: selected ? ZTheme.ink : ZTheme.card, borderRadius: BorderRadius.circular(99), border: Border.all(color: selected ? ZTheme.ink : ZTheme.hairline)),
+        child: Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: selected ? ZTheme.onInk : ZTheme.ink)),
       ),
     );
   }
@@ -230,9 +230,9 @@ class AdminButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = filled ? Colors.white : color;
+    final fg = filled ? ZTheme.textOn(color) : color;
     return Material(
-      color: filled ? color : Colors.white,
+      color: filled ? color : ZTheme.card,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: filled ? BorderSide.none : const BorderSide(color: ZTheme.hairline)),
       child: InkWell(
         onTap: onTap,

@@ -111,7 +111,7 @@ class _RequestCard extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: const ShapeDecoration(color: ZTheme.ink, shape: StadiumBorder()),
-            child: Text(r.rideName, style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700)),
+            child: Text(r.rideName, style: const TextStyle(color: ZTheme.onInk, fontSize: 13, fontWeight: FontWeight.w700)),
           ),
           if (r.linked) ...[
             const SizedBox(width: 6),
@@ -285,7 +285,7 @@ class _FinishedPanelState extends State<_FinishedPanel> {
           Text('Receba ${BR.money(r.fare)} em dinheiro do passageiro.', textAlign: TextAlign.center, style: ZText.sub),
         const SizedBox(height: 12),
         line('Valor da corrida', BR.money(r.fare)),
-        line('Taxa Zipride (20%)', '− ${BR.money(r.fare - r.driverShare)}'),
+        line('Taxa ITAX (20%)', '− ${BR.money(r.fare - r.driverShare)}'),
         const Divider(),
         line('Seu ganho', BR.money(r.driverShare), bold: true),
         const SizedBox(height: 12),

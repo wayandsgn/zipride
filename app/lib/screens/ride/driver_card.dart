@@ -102,7 +102,7 @@ class DriverCard extends StatelessWidget {
         PrimaryButton(
           arrived ? 'Iniciar viagem' : 'Já estou no carro',
           key: const ValueKey('startTrip'),
-          color: arrived ? Colors.black : const Color(0xFF404040),
+          color: arrived ? ZTheme.accent : ZTheme.fill2,
           onTap: store.startTrip,
         ),
       ]),
@@ -141,7 +141,7 @@ class DriverSummary extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ZTheme.card,
               borderRadius: BorderRadius.circular(99),
               boxShadow: const [BoxShadow(color: Color(0x26000000), blurRadius: 2, offset: Offset(0, 1))],
             ),

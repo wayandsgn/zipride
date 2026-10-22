@@ -37,7 +37,7 @@ class LargeTitlePage extends StatelessWidget {
 
 /// A pushed page with a small centred title and an iOS back chevron.
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key, required this.title, required this.children, this.background = ZTheme.fill});
+  const DetailPage({super.key, required this.title, required this.children, this.background = ZTheme.surface});
 
   final String title;
   final List<Widget> children;
@@ -78,7 +78,7 @@ class GroupSection extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(14),
           child: ColoredBox(
-            color: Colors.white,
+            color: ZTheme.card,
             child: Column(children: [
               for (var i = 0; i < children.length; i++) ...[
                 if (i > 0) const Padding(padding: EdgeInsets.only(left: 16), child: Divider()),

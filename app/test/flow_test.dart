@@ -15,7 +15,7 @@ void main() {
   Future<void> boot(WidgetTester tester) async {
     setScreen(tester, const Size(393, 852), ratio: 3);
     store = RideStore(timeScale: 4);
-    await tester.pumpWidget(ZiprideApp(store: store));
+    await tester.pumpWidget(ItaxApp(store: store));
     await tester.pump(const Duration(milliseconds: 500));
   }
 

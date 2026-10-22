@@ -155,11 +155,11 @@ class _RatingScreenState extends State<RatingScreen> {
           duration: const Duration(milliseconds: 200),
           height: 44,
           alignment: Alignment.center,
-          decoration: BoxDecoration(color: selected ? Colors.black : ZTheme.fill2, borderRadius: BorderRadius.circular(99)),
+          decoration: BoxDecoration(color: selected ? ZTheme.ink : ZTheme.fill2, borderRadius: BorderRadius.circular(99)),
           child: FittedBox(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Text(label, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: selected ? Colors.white : ZTheme.ink)),
+              child: Text(label, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: selected ? ZTheme.onInk : ZTheme.ink)),
             ),
           ),
         ),

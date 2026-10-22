@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 
-/// OpenStreetMap basemap, desaturated and lifted so it reads like a muted Apple map.
+/// OpenStreetMap basemap, inverted to a dark grey night map behind the black UI.
 /// Shared by every map in the customer, driver and admin apps.
 class MapTiles extends StatelessWidget {
   const MapTiles({super.key});
@@ -14,19 +14,22 @@ class MapTiles extends StatelessWidget {
     if (!enabled) return const SizedBox.shrink();
     return TileLayer(
       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-      userAgentPackageName: 'app.zipride.zipride',
+      userAgentPackageName: 'app.itax.itax',
       maxZoom: 19,
       tileBuilder: (context, tile, _) => ColorFiltered(colorFilter: _muted, child: tile),
     );
   }
 }
 
-/// 70% desaturated, slightly brighter: keeps streets legible but quiet behind the UI.
+/// Grayscale, inverted and compressed to dark greys: streets stay legible but quiet.
 const _muted = ColorFilter.matrix([
-  0.52, 0.48, 0.07, 0, 14,
-  0.17, 0.83, 0.07, 0, 14,
-  0.17, 0.48, 0.42, 0, 14,
+  -0.17, -0.57, -0.06, 0, 225,
+  -0.17, -0.57, -0.06, 0, 228,
+  -0.17, -0.57, -0.06, 0, 234,
   0, 0, 0, 1, 0,
 ]);
 
-const mapBackground = Color(0xFFF2F1ED);
+const mapBackground = Color(0xFF1A1B1E);
+
+/// Route lines drawn over the dark map.
+const routeColor = Color(0xFFFFFFFF);

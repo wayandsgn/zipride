@@ -85,7 +85,7 @@ class _Banner extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Text('Zipride Moto', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Colors.white)),
+                const Text('ITAX Moto', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: Colors.white)),
                 const SizedBox(height: 2),
                 Text('Do Centro à Rodoviária a partir de ${BR.money(5.90)}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Colors.white)),
               ]),
@@ -111,7 +111,7 @@ class _ServiceCard extends StatelessWidget {
           width: 48,
           height: 48,
           decoration: BoxDecoration(color: ZTheme.accentSoft, borderRadius: BorderRadius.circular(14)),
-          child: Icon(tile.icon, size: 25, color: Colors.black),
+          child: Icon(tile.icon, size: 25, color: ZTheme.ink),
         ),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(tile.title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w700)),

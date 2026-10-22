@@ -1,11 +1,11 @@
 {
-    "name": "Zipride Demo",
-    "short_name": "Zipride",
+    "name": "ITAX Demo",
+    "short_name": "ITAX",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#009E87",
-    "description": "Zipride: cliente, motorista e painel admin",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "description": "ITAX: cliente, motorista e painel admin",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

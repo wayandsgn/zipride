@@ -51,7 +51,7 @@ class RideOptionsPanel extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: ZTheme.accentSoft,
-                    border: Border.all(color: Colors.black, width: 2),
+                    border: Border.all(color: ZTheme.ink, width: 2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                 ),

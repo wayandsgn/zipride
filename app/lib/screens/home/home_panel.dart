@@ -101,7 +101,7 @@ class _WhereToPill extends StatelessWidget {
             height: 38,
             margin: const EdgeInsets.only(right: 9),
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(99)),
+            decoration: BoxDecoration(color: ZTheme.card, borderRadius: BorderRadius.circular(99)),
             child: Row(children: [
               const Icon(CupertinoIcons.clock_fill, size: 15),
               const SizedBox(width: 6),

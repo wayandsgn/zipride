@@ -67,7 +67,7 @@ class _DemoHubState extends State<DemoHub> {
 
   @override
   Widget build(BuildContext context) {
-    final rider = PhoneFrame(label: 'App do cliente', child: ZiprideApp(key: _riderKey, store: _link.rider));
+    final rider = PhoneFrame(label: 'App do cliente', child: ItaxApp(key: _riderKey, store: _link.rider));
     final driver = PhoneFrame(label: 'App do motorista', child: DriverApp(key: _driverKey, store: _link.driver));
     final Widget body = switch (_mode) {
       DemoMode.both => Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -80,7 +80,7 @@ class _DemoHubState extends State<DemoHub> {
       DemoMode.admin => const SizedBox.shrink(),
     };
     return Scaffold(
-      backgroundColor: const Color(0xFFEDEDF0),
+      backgroundColor: const Color(0xFF0B0B0C),
       body: Column(children: [
         _TopBar(mode: _mode, onMode: _setMode, onRestart: _restart),
         Expanded(
@@ -116,13 +116,13 @@ class _TopBar extends StatelessWidget {
     final narrow = MediaQuery.sizeOf(context).width < 760;
     return Container(
       width: double.infinity,
-      color: Colors.white,
+      color: ZTheme.card,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: SafeArea(
         bottom: false,
         child: Wrap(alignment: WrapAlignment.spaceBetween, crossAxisAlignment: WrapCrossAlignment.center, runSpacing: 10, spacing: 12, children: [
           Row(mainAxisSize: MainAxisSize.min, children: [
-            const ZiprideWordmark(size: 26),
+            const ItaxWordmark(size: 26),
             if (!narrow) ...[
               const SizedBox(width: 10),
               const Text('Demonstração web · Itapipoca, CE', style: ZText.sub),
@@ -169,7 +169,7 @@ class _Steps extends StatelessWidget {
         for (final s in steps)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(99)),
+            decoration: BoxDecoration(color: ZTheme.fill, borderRadius: BorderRadius.circular(99)),
             child: Text(s, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
           ),
       ]),

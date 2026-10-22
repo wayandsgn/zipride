@@ -42,7 +42,7 @@ class DriverRequest {
   double get tripKm => Geo.roadDistanceKm(pickup.point, destination.point);
   int get tripMinutes => (tripKm / 0.55).round().clamp(4, 999);
 
-  /// Zipride keeps 20%; the driver receives the rest.
+  /// ITAX keeps 20%; the driver receives the rest.
   double get driverShare => (fare * 0.8 * 100).round() / 100;
 }
 
@@ -278,8 +278,8 @@ class DriverStore extends ChangeNotifier {
   }
 
   static final _demoRequests = [
-    DriverRequest(id: 'd1', passenger: 'Ana Beatriz', passengerRating: 4.95, pickup: Fixtures.place('mercado'), destination: Fixtures.place('rodoviaria'), rideName: 'ZiprideX', fare: 9.90, payment: PaymentMethod.pix),
-    DriverRequest(id: 'd2', passenger: 'João Pedro', passengerRating: 4.81, pickup: Fixtures.place('estacao'), destination: Fixtures.place('ifce'), rideName: 'ZiprideX', fare: 9.90, payment: PaymentMethod.cash),
+    DriverRequest(id: 'd1', passenger: 'Ana Beatriz', passengerRating: 4.95, pickup: Fixtures.place('mercado'), destination: Fixtures.place('rodoviaria'), rideName: 'ITAX Go', fare: 9.90, payment: PaymentMethod.pix),
+    DriverRequest(id: 'd2', passenger: 'João Pedro', passengerRating: 4.81, pickup: Fixtures.place('estacao'), destination: Fixtures.place('ifce'), rideName: 'ITAX Go', fare: 9.90, payment: PaymentMethod.cash),
     DriverRequest(id: 'd3', passenger: 'Francisca Lima', passengerRating: 4.98, pickup: Fixtures.place('praca'), destination: Fixtures.place('pedrinhas'), rideName: 'Comfort', fare: 65.70, payment: PaymentMethod.visa),
   ];
 }

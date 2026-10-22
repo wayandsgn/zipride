@@ -1,5 +1,5 @@
 name: zipride
-description: "Zipride: corridas em Itapipoca (cliente, motorista e painel admin)."
+description: "ITAX: corridas em Itapipoca (cliente, motorista e painel admin)."
 publish_to: 'none'
 version: 0.1.0+1
 
