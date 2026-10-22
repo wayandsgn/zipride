@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f5">
+  <meta name="description" content="Conheça o Zipride. Explore uma corrida completa em Itapipoca, direto no navegador e sem instalar nada.">
+  <meta property="og:title" content="Zipride — Sua cidade, no seu ritmo">
+  <meta property="og:description" content="Uma experiência interativa de mobilidade em Itapipoca. Escolha um destino e experimente.">
+  <meta property="og:type" content="website">
+  <title>Zipride — Demonstração interativa</title>
+  <link rel="icon" href="mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#experience">Ir para o aplicativo</a>
+  <header class="masthead">
+    <a class="wordmark" href="./" aria-label="Zipride, início"><img src="mark.svg" alt="" width="38" height="38"><span>zipride</span></a>
+    <span class="demo-label"><span aria-hidden="true"></span>Demonstração interativa</span>
+    <button id="share" class="text-button" type="button">Copiar link <span aria-hidden="true">↗</span></button>
+  </header>
+
+  <main>
+    <section class="story" aria-labelledby="headline">
+      <p class="eyebrow"><span></span>FEITO PARA ITAPIPOCA, CE</p>
+      <h1 id="headline">Sua cidade.<br>Seu caminho.<br><span>Seu Zipride.</span></h1>
+      <p class="intro">Do Centro à Praia da Baleia, uma nova maneira de se mover. Experimente uma corrida, do primeiro toque à chegada.</p>
+      <a class="primary-button" href="#experience" id="start">Experimentar agora <span aria-hidden="true">↗</span></a>
+
+      <ol class="guide" aria-label="Como experimentar">
+        <li><span class="step-number">01</span><div><strong>Escolha seu destino</strong><p>Toque em “Para onde?” e busque um lugar.</p></div></li>
+        <li><span class="step-number">02</span><div><strong>Encontre seu jeito de ir</strong><p>Escolha a categoria e confirme a corrida.</p></div></li>
+        <li><span class="step-number">03</span><div><strong>Viva a experiência completa</strong><p>Conheça o motorista, viaje e avalie.</p></div></li>
+      </ol>
+      <p class="demo-note">Uma prévia para explorar à vontade.<br>Corridas e pagamentos simulados, sem cobranças.</p>
+    </section>
+
+    <section id="experience" class="experience" aria-label="Aplicativo Zipride interativo" tabindex="-1">
+      <div class="device">
+        <div class="device-top" aria-hidden="true"><span>9:41</span><span class="device-camera"></span><span class="signal">▮▮▮ &nbsp; ▰</span></div>
+        <iframe id="app-frame" src="app/" title="Aplicativo Zipride — simule uma corrida" allow="fullscreen" loading="eager"></iframe>
+        <div class="device-bottom" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="demo-controls">
+        <span class="live-label"><span aria-hidden="true"></span>Explore o aplicativo</span>
+        <button id="reset" type="button" class="text-button"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Reiniciar</button>
+      </div>
+      <a class="standalone" href="app/" target="_blank" rel="noopener">Abrir somente o aplicativo <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <footer><span>MOBILIDADE COM SOTAQUE LOCAL.</span><span>Zipride · Itapipoca, Ceará</span></footer>
+  <div id="feedback" role="status" aria-live="polite" class="feedback"></div>
+  <dialog id="share-dialog" aria-labelledby="share-title"><h2 id="share-title">Link da demonstração</h2><p>Copie o endereço abaixo para compartilhar.</p><label for="share-url">Endereço</label><input id="share-url" type="url" readonly><button class="primary-button" id="close-share" type="button">Fechar</button></dialog>
+</body>
+</html>

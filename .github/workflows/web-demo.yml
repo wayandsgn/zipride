@@ -1,0 +1,80 @@
+name: Browser demo
+
+on:
+  push:
+    branches: [main, codex/zipride-ios-validation]
+    paths: ['app/**', 'demo/**', 'scripts/check-web-demo.mjs', '.github/workflows/web-demo.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zipride-web-demo
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.7'
+          channel: stable
+          cache: true
+      - name: Analyze and test in Chrome
+        working-directory: app
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test --platform chrome
+      - name: Build browser demo
+        working-directory: app
+        run: |
+          flutter build web --release --base-href /zipride/app/ --no-web-resources-cdn
+          mkdir -p build/serve/zipride/app build/serve/zipride/fonts
+          cp -R build/web/. build/serve/zipride/app/
+          cp -R ../demo/. build/serve/zipride/
+          cp assets/fonts/Inter-Regular.ttf assets/fonts/Inter-SemiBold.ttf assets/fonts/Inter-ExtraBold.ttf build/serve/zipride/fonts/
+          touch build/serve/zipride/.nojekyll
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check the release demo in the browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/zipride-browser" --no-save --no-package-lock playwright@1.58.2
+          python3 -m http.server 8080 --bind 127.0.0.1 --directory app/build/serve > "$RUNNER_TEMP/zipride-server.log" 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in {1..20}; do
+            if curl -fsS http://127.0.0.1:8080/zipride/ > /dev/null; then break; fi
+            sleep 1
+          done
+          PLAYWRIGHT_MODULE="$RUNNER_TEMP/zipride-browser/node_modules/playwright/index.mjs" node scripts/check-web-demo.mjs
+      - name: Save browser screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zipride-web-checks
+          path: app/screenshots/web
+          retention-days: 7
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/build/serve/zipride
+
+  publish:
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/codex/zipride-ios-validation'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish the verified demo
+        id: deployment
+        uses: actions/deploy-pages@v4

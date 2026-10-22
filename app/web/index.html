@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#009e87">
+  <meta name="description" content="Experimente o Zipride: uma demonstração de corridas em Itapipoca.">
+  <title>Zipride — Experimente</title>
+  <style>
+    html,body{margin:0;height:100%;background:#fff;font-family:Arial,sans-serif}
+    #loading{position:fixed;inset:0;display:grid;place-content:center;text-align:center;color:#153b35;padding:24px;gap:14px}
+    #loading strong{font-size:30px;letter-spacing:-1px}
+    #loading p{margin:0;font-size:14px;line-height:1.6;color:#526762}
+    #loading button{padding:12px 18px;background:#111;color:#fff;border:0;border-radius:12px;font:inherit;cursor:pointer}
+    .spinner{margin:0 auto;width:28px;height:28px;border:3px solid #e6efec;border-top-color:#009e87;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(prefers-reduced-motion:reduce){.spinner{animation:none}}
+  </style>
+</head>
+<body>
+  <div id="loading" role="status" aria-live="polite">
+    <strong>zipride</strong>
+    <div class="spinner" aria-hidden="true"></div>
+    <p id="loading-text">Preparando sua próxima corrida…</p>
+    <button id="retry" hidden onclick="location.reload()">Tentar novamente</button>
+  </div>
+  <noscript>Ative o JavaScript no navegador para experimentar o Zipride.</noscript>
+  <script>
+    window.ziprideLoadTimer = setTimeout(() => {
+      document.getElementById('loading-text').textContent = 'O carregamento está demorando. Confira sua conexão ou tente novamente.';
+      document.getElementById('retry').hidden = false;
+    }, 45000);
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

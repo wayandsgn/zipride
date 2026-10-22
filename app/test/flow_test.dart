@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,8 +13,7 @@ void main() {
   setUpAll(() async {
     final loader = FontLoader('Inter');
     for (final w in ['Regular', 'Medium', 'SemiBold', 'Bold', 'ExtraBold', 'Black']) {
-      final bytes = File('assets/fonts/Inter-$w.ttf').readAsBytesSync();
-      loader.addFont(Future.value(ByteData.sublistView(bytes)));
+      loader.addFont(rootBundle.load('assets/fonts/Inter-$w.ttf'));
     }
     await loader.load();
   });
