@@ -24,12 +24,16 @@ jobs:
           flutter-version: '3.47.7'
           channel: stable
           cache: true
-      - name: Analyze and test in Chrome
+      - name: Analyze the app
+        timeout-minutes: 3
         working-directory: app
         run: |
           flutter pub get
           flutter analyze
-          flutter test --platform chrome
+      - name: Test the ride flow
+        timeout-minutes: 3
+        working-directory: app
+        run: flutter test --reporter expanded
       - name: Build browser demo
         working-directory: app
         run: |
@@ -43,6 +47,7 @@ jobs:
         with:
           node-version: '22'
       - name: Check the release demo in the browser
+        timeout-minutes: 5
         run: |
           npm install --prefix "$RUNNER_TEMP/zipride-browser" --no-save --no-package-lock playwright@1.58.2
           python3 -m http.server 8080 --bind 127.0.0.1 --directory app/build/serve > "$RUNNER_TEMP/zipride-server.log" 2>&1 &

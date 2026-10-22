@@ -24,10 +24,10 @@ Para desenvolver no Windows, macOS ou Linux com Chrome instalado:
 
 ```sh
 flutter run -d chrome
-flutter test --platform chrome
+flutter test
 ```
 
-O workflow `web-demo.yml` compila o app com base `/zipride/app/`, copia a apresentação para a raiz do site e só publica depois dos testes. Para reproduzir o build e a apresentação localmente:
+O workflow `web-demo.yml` executa o teste de widget, compila o app com base `/zipride/app/` e percorre o fluxo real no Chrome usando Playwright. Ele também verifica reinício, compartilhamento e quatro tamanhos de tela antes de publicar. Para reproduzir o build e a apresentação localmente:
 
 ```sh
 flutter build web --release --base-href /zipride/app/ --no-web-resources-cdn
